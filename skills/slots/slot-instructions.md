@@ -125,11 +125,11 @@ You save at two moments, each time they come round: right after every ready, bec
 
   Where it stands takes a dozen words; the rulings, review results and filed follow-ups are on the issue and the PR, so name where they are instead of listing them.
 - A follow-up goes where the skill sends it (a `## Next up` line you add, a memory, or an issue), never into your bullet, which goes away at the merge. `## Next up` runs in order, first thing first: a follow-up Dan calls next goes at the top, any other at the bottom. Remove no one else's line to make room; when `## Next up` is full, use a memory or an issue.
-- Report the save in a line, plus the skill's inbox lines if you wrote any, then end on the status as usual.
+- Report the save in a line, plus the lessons the skill filed in the setup repo, if any, then end on the status as usual.
 
 ## Beside the other slots
 
-- Write only inside your folder, with absolute paths and `git -C`, since a shell can drift into another checkout. Memory is the exception: it is the main checkout's, shared by every slot, and saving a memory there is expected, as are the inbox entries `dan-save-session` writes.
+- Write only inside your folder, with absolute paths and `git -C`, since a shell can drift into another checkout. Memory is the exception: it is the main checkout's, shared by every slot, and saving a memory there is expected.
 - Scratch files, such as screenshots and measuring scripts, go in your scratchpad directory. Anything left in the folder shows in the table as uncommitted work and blocks the cleanup after a merge.
 - The dev server is yours through `slots server stop` and `slots server start`. Start no second one, and stop no process by name: other slots and the main checkout run the same command.
 - `slots start`, `slots stop` and `slots clear` are Dan's. He starts every item himself.

@@ -18,24 +18,27 @@ The harness sets memory format and the four types; the global `CLAUDE.md` adds t
 - **Pointer lines are recurring cost.** Every `MEMORY.md` line loads on every future session in this repo. Earn each one, and keep it to a line.
 - **Durable instructions are CLAUDE.md's job.** When something the user said generalizes past this session ("always do X"), name the scope and ask — that's a `CLAUDE.md` edit, not a memory.
 
-**A lesson a global skill should carry also goes to the inbox**
+**A lesson a global skill should carry also goes to the setup repo**
 
-Ask of each memory you write or update: which global skill or agent would this change? Global means one under `~/.claude/skills/` or `~/.claude/agents/`, not one this project ships. A lesson with a target there goes to the inbox, and so does a fact about the harness, a tool or this machine that no skill fires on, with `global CLAUDE.md` as its target. Project memory is per repo, so such a lesson is invisible everywhere else until it reaches the global setup, and that is written in `claude-tools`.
+The setup repo is the one `~/.claude/` is deployed from, named in the global `CLAUDE.md`. Ask of each memory you write or update: which global skill or agent would this change? Global means one under `~/.claude/skills/` or `~/.claude/agents/`, not one this project ships. A lesson with a target there is filed as an issue in the setup repo, and so is a fact about the harness, a tool or this machine that no skill fires on, with `global CLAUDE.md` as its target. Project memory is per repo, so such a lesson is invisible everywhere else until it reaches the global setup, and that is written in the setup repo.
 
-A lesson with no target stays in this repo's memory, however widely it seems to apply. A correction to one piece of work reads as true in any project once it is written as a principle, and with no skill to fire it the inbox has nowhere to put it. A lesson one of the project's own dev kit skills should carry gets no entry either: name it in the Step 3 report as one for the kit.
+A lesson with no target stays in this repo's memory, however widely it seems to apply. A correction to one piece of work reads as true in any project once it is written as a principle, and with no skill to fire it the setup repo has nowhere to put it. A lesson one of the project's own dev kit skills should carry gets no issue either: name it in the Step 3 report as one for the kit.
 
-Save the memory here as usual, then write `~/Sites/sandbox/claude-tools/inbox/<YYYY-MM-DD>-<repo>-<memory-name>.md`:
+Save the memory here as usual, then:
+
+1. Search the setup repo's lessons, open and closed: `gh issue list --repo <setup repo> --label lesson --state all --search "<two or three key terms>"`. When an open one already covers it, add the block below to it as a comment instead of filing a second: `gh issue comment <n> --repo <setup repo> --body-file <file>`. When only a closed one does, file a new issue and start its block with `Recurs after #<n>.`: the lesson was promoted or ruled out, and it came back, so the promoted text did not work. A comment on a closed issue is never read.
+2. Pick the labels from `gh label list --repo <setup repo> --limit 500` (without `--limit` it lists only 30, and the newest are the ones cut), whose descriptions say what each covers: `lesson`; one kind (`tool bug`, `new rule`, `tool fact` or `new capability`); and the label for the `Target`, the skill, agent or file the fix would edit, named as it is under `~/.claude/`: a skill's folder name under `skills/`, an agent's file name under `agents/` without `.md`, or a file's name (`CLAUDE.md` is labeled `global CLAUDE.md`, a `machines/*.md` file `machine.md`). Each label's description names its path under `dotclaude/`, which deploys to the same path under `~/.claude/`: match on that path, not the spelling. When no label's description names the target's path, create it with `gh label create "<name>" --repo <setup repo> --color 1d76db --description "Changes <path under dotclaude/>"`; an "already exists" error means the label is there, so use it. A new skill or agent has no target name yet: give it the kind alone, or the label of the tool it extends.
+3. Write the block to a file in your scratchpad and file it: `gh issue create --repo <setup repo> --title "<the lesson in a line>" --label lesson --label "<kind>" --label "<target>" --body-file <file>`.
 
 ```markdown
----
-from: <this repo's folder name>
-memory: <absolute path of the memory file>
-target: <the skill or agent it would change, or global CLAUDE.md>
----
+- **From:** `<this repo's folder name>`
+- **Memory:** `<absolute path of the memory file>` (<this machine: Mac or devbox>)
+- **Target:** <the skill, agent or file it would change, named as in step 2>
+
 <the lesson in a sentence or two, and the task it bites during>
 ```
 
-A session there promotes the lesson and removes this project's copy. Write no entry when this repo is `claude-tools`, or when that `inbox/` folder is not on this machine; in the second case say so in the Step 3 report.
+A session in the setup repo promotes the lesson, removes this project's copy and closes the issue; it reads the memory on the machine the block names. File nothing when this repo is the setup repo. When a `gh` command fails or is denied, add a `## Next up` line to `NEXT.md` holding the title, labels and block, so the next session can file it, and say so in the Step 3 report.
 
 **What survives contact with time**
 
@@ -97,6 +100,6 @@ Then run `/usr/bin/python3 ~/.claude/hooks/dan-cache-cold-guard.py --disarm` and
 
 Tell the user which memories you wrote, updated, or deleted, by name, what you judged not worth keeping, and the headline of what `NEXT.md` now says. They should know whether this worked without opening a file.
 
-Give inbox entries their own part of the report, under a bold **Sent to the Claude Tools inbox** label: one line per entry, with the lesson as you wrote it and the entry's file name, then a line saying that deleting a file drops its entry. The entry is written without asking, so this is the only place the user sees it and can refuse it.
+Give the lessons their own part of the report, under a bold **Filed in the setup repo** label: one line per issue or comment, with the lesson as you wrote it and its URL, then a line saying that closing an issue drops it. It is filed without asking, so this is where the user sees it and can refuse it.
 
 Close by confirming the handoff is complete, so they know it's safe to `/clear` or quit. Nothing further is captured after this point — anything they do next is a new stretch of work needing its own save.

@@ -146,9 +146,9 @@ change made inside Claude Code. The pre-commit drift guard blocks a commit
 until it is reconciled.
 
 **Lesson**:
-Something a session learned that holds in any project. Sessions in other
-repos send lessons to this repo's `inbox/`, to be promoted into the skill or
-agent that should carry them.
+Something a session learned that a global skill or agent should carry.
+Sessions in other repos file lessons as issues labeled `lesson` in the repo
+the setup is deployed from, to be promoted into that skill or agent.
 
 **Export**:
 Copying the shareable files to the public repo with `./publish.py`, after a
