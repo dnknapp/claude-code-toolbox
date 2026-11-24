@@ -1,0 +1,4 @@
+{
+  "yieldsTo": "gh-issue-pr-format",
+  "kit": { "path": "skills/gh-issue-pr-format/SKILL.md", "mode": "port", "portedFrom": "0263656" }
+}

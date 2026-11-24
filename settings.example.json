@@ -1,0 +1,54 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "/bin/bash $HOME/.claude/statusline.sh"
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/bash $HOME/.claude/hooks/dan-status-check-redirect.sh"
+          },
+          {
+            "type": "command",
+            "command": "/usr/bin/python3 $HOME/.claude/hooks/dan-cache-cold-guard.py"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/bash $HOME/.claude/hooks/dan-memory-setup-nag.sh"
+          },
+          {
+            "type": "command",
+            "command": "/usr/bin/python3 $HOME/.claude/hooks/dan-cache-cold-guard.py --session-start"
+          },
+          {
+            "type": "command",
+            "command": "/usr/bin/python3 $HOME/.claude/hooks/dan-skill-fallbacks.py"
+          },
+          {
+            "type": "command",
+            "command": "/bin/bash $HOME/.claude/hooks/dan-config-behind.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/python3 $HOME/.claude/hooks/dan-cache-cold-guard.py --stop"
+          }
+        ]
+      }
+    ]
+  }
+}

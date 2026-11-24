@@ -1,0 +1,4 @@
+{
+  "yieldsTo": "project-glossary",
+  "kit": { "path": "skills/project-glossary", "mode": "copy" }
+}
